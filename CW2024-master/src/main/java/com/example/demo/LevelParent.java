@@ -74,6 +74,7 @@ public abstract class LevelParent extends Observable {
 	}
 
 	public void goToNextLevel(String levelName) {
+		endGame();
 		setChanged();
 		notifyObservers(levelName);
 	}
@@ -214,6 +215,35 @@ public abstract class LevelParent extends Observable {
 		timeline.stop();
 		levelView.showGameOverImage();
 	}
+
+	public void endGame(){
+		// Stop the timeline (pause any ongoing animations or timed events)
+		timeline.stop();
+
+		// Clear all key frames from the timeline (removes any scheduled animations or events)
+		timeline.getKeyFrames().clear();
+
+		// Remove the key release event listener from the background
+		// (prevents further keyboard events from being processed after game ends)
+		background.setOnKeyReleased(null);
+
+		// Clear all child nodes from the root container (removes all visible game objects from the screen)
+		root.getChildren().clear();
+
+		// Clear the collections tracking different game elements:
+		// - Friendly units (e.g., player's characters or allies)
+		friendlyUnits.clear();
+
+		// - Enemy projectiles (e.g., bullets fired by enemies)
+		enemyProjectiles.clear();
+
+		// - Enemy units (e.g., enemy characters or enemies)
+		enemyUnits.clear();
+
+		// - User projectiles (e.g., bullets fired by the player)
+		userProjectiles.clear();
+	}
+
 
 	protected UserPlane getUser() {
 		return user;
