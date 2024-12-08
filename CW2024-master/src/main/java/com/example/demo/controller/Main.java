@@ -20,7 +20,9 @@ public class Main extends Application {
 		stage.setHeight(SCREEN_HEIGHT);
 		stage.setWidth(SCREEN_WIDTH);
 		myController = new Controller(stage);
-		myController.launchGame();
+		// Show the start screen
+		StartScreen startScreen = new StartScreen(stage, myController);
+		startScreen.show();
 	}
 
 	public static void main(String[] args) {
