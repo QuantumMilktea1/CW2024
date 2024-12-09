@@ -1,7 +1,9 @@
 package com.example.demo;
 
+import com.example.demo.controller.BackgroundMusic;
+
 public class LevelOne extends LevelParent {
-	
+
 	private static final String BACKGROUND_IMAGE_NAME = "/com/example/demo/images/background1.jpg";
 	private static final String NEXT_LEVEL = "com.example.demo.LevelTwo";
 	private static final int TOTAL_ENEMIES = 5;
@@ -11,6 +13,7 @@ public class LevelOne extends LevelParent {
 
 	public LevelOne(double screenHeight, double screenWidth) {
 		super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH);
+		initializeMusic(BackgroundMusic.LEVEL_ONE_MUSIC);
 	}
 
 	@Override
@@ -18,8 +21,10 @@ public class LevelOne extends LevelParent {
 		if (userIsDestroyed()) {
 			loseGame();
 		}
-		else if (userHasReachedKillTarget())
+		else if (userHasReachedKillTarget()) {
+			stopMusic();
 			goToNextLevel(NEXT_LEVEL);
+		}
 	}
 
 	@Override

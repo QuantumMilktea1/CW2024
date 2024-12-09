@@ -11,6 +11,8 @@ import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.util.Duration;
 
+import com.example.demo.controller.BackgroundMusic;
+
 public abstract class LevelParent extends Observable {
 
 	private static final double SCREEN_HEIGHT_ADJUSTMENT = 150;
@@ -29,9 +31,10 @@ public abstract class LevelParent extends Observable {
 	private final List<ActiveActorDestructible> enemyUnits;
 	private final List<ActiveActorDestructible> userProjectiles;
 	private final List<ActiveActorDestructible> enemyProjectiles;
-	
+
 	private int currentNumberOfEnemies;
 	private LevelView levelView;
+	protected BackgroundMusic backgroundMusic;
 
 	public LevelParent(String backgroundImageName, double screenHeight, double screenWidth, int playerInitialHealth) {
 		this.root = new Group();
@@ -172,7 +175,7 @@ public abstract class LevelParent extends Observable {
 	}
 
 	private void handleCollisions(List<ActiveActorDestructible> actors1,
-			List<ActiveActorDestructible> actors2) {
+								  List<ActiveActorDestructible> actors2) {
 		for (ActiveActorDestructible actor : actors2) {
 			for (ActiveActorDestructible otherActor : actors1) {
 				if (actor.getBoundsInParent().intersects(otherActor.getBoundsInParent())) {
@@ -217,33 +220,18 @@ public abstract class LevelParent extends Observable {
 	}
 
 	public void endGame(){
-		// Stop the timeline (pause any ongoing animations or timed events)
 		timeline.stop();
-
-		// Clear all key frames from the timeline (removes any scheduled animations or events)
 		timeline.getKeyFrames().clear();
 
-		// Remove the key release event listener from the background
-		// (prevents further keyboard events from being processed after game ends)
 		background.setOnKeyReleased(null);
 
-		// Clear all child nodes from the root container (removes all visible game objects from the screen)
-		root.getChildren().clear();
+		root.getChildren().clear();;
 
-		// Clear the collections tracking different game elements:
-		// - Friendly units (e.g., player's characters or allies)
 		friendlyUnits.clear();
-
-		// - Enemy projectiles (e.g., bullets fired by enemies)
 		enemyProjectiles.clear();
-
-		// - Enemy units (e.g., enemy characters or enemies)
 		enemyUnits.clear();
-
-		// - User projectiles (e.g., bullets fired by the player)
 		userProjectiles.clear();
 	}
-
 
 	protected UserPlane getUser() {
 		return user;
@@ -276,6 +264,17 @@ public abstract class LevelParent extends Observable {
 
 	private void updateNumberOfEnemies() {
 		currentNumberOfEnemies = enemyUnits.size();
+	}
+
+	protected void initializeMusic(String musicPath) {
+		backgroundMusic = new BackgroundMusic(musicPath);
+		backgroundMusic.play();
+	}
+
+	protected void stopMusic() {
+		if (backgroundMusic != null) {
+			backgroundMusic.stop();
+		}
 	}
 
 }
