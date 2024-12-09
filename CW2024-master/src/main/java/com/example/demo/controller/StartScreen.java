@@ -9,15 +9,33 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 public class StartScreen {
 
     private final Stage stage;
     private final Controller controller;
+    private MediaPlayer mediaPlayer;
 
     public StartScreen(Stage stage, Controller controller) {
         this.stage = stage;
         this.controller = controller;
+        initializeBackgroundMusic();
+    }
+
+    private void initializeBackgroundMusic() {
+        try {
+            String musicFile = "/music/backgroundmusic.mp3";  // 请确保这个文件存在
+            Media sound = new Media(getClass().getResource(musicFile).toExternalForm());
+            mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // 循环播放
+            mediaPlayer.setVolume(0.5); // 设置音量为50%
+            mediaPlayer.play();
+        } catch (Exception e) {
+            System.out.println("Background music could not be loaded");
+        }
     }
 
     public void show() {
@@ -37,6 +55,7 @@ public class StartScreen {
         startButton.setStyle(buttonStyle);
         startButton.setOnAction(e -> {
             try {
+                stopBackgroundMusic();
                 controller.launchGame();
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -45,7 +64,10 @@ public class StartScreen {
 
         Button exitButton = new Button("Exit");
         exitButton.setStyle(buttonStyle.replace("#4CAF50", "#f44336")); // Red color for exit
-        exitButton.setOnAction(e -> stage.close());
+        exitButton.setOnAction(e -> {
+            stopBackgroundMusic();
+            stage.close();
+        });
 
         // Create a VBox to hold the title and buttons
         VBox vbox = new VBox(30);
@@ -58,7 +80,7 @@ public class StartScreen {
         layout.setStyle("-fx-background-color: linear-gradient(to bottom, #1a237e, #000000);");
 
         try {
-            Image backgroundImage = new Image(getClass().getResourceAsStream("/images/background1.jpg"));
+            Image backgroundImage = new Image(getClass().getResourceAsStream("/com/example/demo/images/background1.jpg"));
             ImageView backgroundView = new ImageView(backgroundImage);
             backgroundView.setFitWidth(stage.getWidth());
             backgroundView.setFitHeight(stage.getHeight());
@@ -72,5 +94,11 @@ public class StartScreen {
         Scene scene = new Scene(layout, stage.getWidth(), stage.getHeight());
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void stopBackgroundMusic() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+        }
     }
 }
