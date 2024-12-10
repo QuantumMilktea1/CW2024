@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.Plane.Boss;
 import com.example.demo.controller.BackgroundMusic;
 
 public class LevelTwo extends LevelParent {

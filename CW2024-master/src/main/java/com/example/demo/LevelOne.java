@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.Actor.ActiveActorDestructible;
+import com.example.demo.Plane.EnemyPlane;
 import com.example.demo.controller.BackgroundMusic;
 
 public class LevelOne extends LevelParent {

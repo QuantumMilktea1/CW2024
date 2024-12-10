@@ -3,6 +3,9 @@ package com.example.demo;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.example.demo.Actor.ActiveActorDestructible;
+import com.example.demo.Plane.FighterPlane;
+import com.example.demo.Plane.UserPlane;
 import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
