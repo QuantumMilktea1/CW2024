@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.Levels;
 
 import java.util.*;
 import java.util.stream.Collectors;
