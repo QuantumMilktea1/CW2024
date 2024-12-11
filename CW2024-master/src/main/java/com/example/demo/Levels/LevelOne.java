@@ -4,6 +4,10 @@ import com.example.demo.Actor.ActiveActorDestructible;
 import com.example.demo.Plane.EnemyPlane;
 import com.example.demo.controller.BackgroundMusic;
 
+/**
+ * LevelOne class represents the first level of the game.
+ * It manages the game state, enemy spawning, and transitions to the next level.
+ */
 public class LevelOne extends LevelParent {
 
 	private static final String BACKGROUND_IMAGE_NAME = "/com/example/demo/images/background1.jpg";
@@ -13,11 +17,22 @@ public class LevelOne extends LevelParent {
 	private static final double ENEMY_SPAWN_PROBABILITY = .20;
 	private static final int PLAYER_INITIAL_HEALTH = 5;
 
+	/**
+	 * Constructs a LevelOne instance with specified screen dimensions.
+	 *
+	 * @param screenHeight the height of the screen
+	 * @param screenWidth  the width of the screen
+	 */
 	public LevelOne(double screenHeight, double screenWidth) {
 		super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH);
 		initializeMusic(BackgroundMusic.LEVEL_ONE_MUSIC);
 	}
 
+	/**
+	 * Checks if the game is over based on the user's status.
+	 * If the user is destroyed, the game is lost.
+	 * If the user has reached the kill target, the next level is initiated.
+	 */
 	@Override
 	protected void checkIfGameOver() {
 		if (userIsDestroyed()) {
@@ -29,11 +44,18 @@ public class LevelOne extends LevelParent {
 		}
 	}
 
+	/**
+	 * Initializes friendly units by adding the user to the game root.
+	 */
 	@Override
 	protected void initializeFriendlyUnits() {
 		getRoot().getChildren().add(getUser());
 	}
 
+	/**
+	 * Spawns enemy units based on the defined spawn probability.
+	 * The number of enemies spawned is determined by the current count.
+	 */
 	@Override
 	protected void spawnEnemyUnits() {
 		int currentNumberOfEnemies = getCurrentNumberOfEnemies();
@@ -46,11 +68,21 @@ public class LevelOne extends LevelParent {
 		}
 	}
 
+	/**
+	 * Instantiates the level view for the current level.
+	 *
+	 * @return a new LevelView instance
+	 */
 	@Override
 	protected LevelView instantiateLevelView() {
 		return new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
 	}
 
+	/**
+	 * Checks if the user has reached the kill target to advance to the next level.
+	 *
+	 * @return true if the user has reached the kill target, false otherwise
+	 */
 	private boolean userHasReachedKillTarget() {
 		return getUser().getNumberOfKills() >= KILLS_TO_ADVANCE;
 	}

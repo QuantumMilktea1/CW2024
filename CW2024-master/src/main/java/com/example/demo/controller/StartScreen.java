@@ -13,18 +13,32 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
+/**
+ * The StartScreen class is responsible for displaying the initial screen of the application,
+ * including the title and buttons to start the game or exit the application.
+ */
 public class StartScreen {
 
     private final Stage stage;
     private final Controller controller;
     private MediaPlayer mediaPlayer;
 
+    /**
+     * Constructs a StartScreen with the specified stage and controller.
+     *
+     * @param stage     the primary stage for this application
+     * @param controller the controller that manages game logic
+     */
     public StartScreen(Stage stage, Controller controller) {
         this.stage = stage;
         this.controller = controller;
         initializeBackgroundMusic();
     }
 
+    /**
+     * Initializes the background music for the application.
+     * The music will loop indefinitely at 50% volume.
+     */
     private void initializeBackgroundMusic() {
         try {
             String musicFile = "/music/backgroundmusic.mp3";  // 请确保这个文件存在
@@ -38,6 +52,9 @@ public class StartScreen {
         }
     }
 
+    /**
+     * Displays the start screen with a title and buttons to start the game or exit.
+     */
     public void show() {
         // Create a label for the title
         Label titleLabel = new Label("SKY BATTLE");
@@ -96,6 +113,9 @@ public class StartScreen {
         stage.show();
     }
 
+    /**
+     * Stops the background music if it is currently playing.
+     */
     private void stopBackgroundMusic() {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
