@@ -10,9 +10,9 @@ import javafx.scene.media.MediaPlayer;
 public class BackgroundMusic {
     private MediaPlayer mediaPlayer;
 
-    public static final String MENU_MUSIC = "/music/backgroundmusic.mp3";
-    public static final String LEVEL_ONE_MUSIC = "/music/backgroundmusic.mp3";
-    public static final String LEVEL_TWO_MUSIC = "/music/backgroundmusic.mp3";
+    public static final String MENU_MUSIC = "/music/menubackgroundmusic.mp3";
+    public static final String LEVEL_ONE_MUSIC = "/music/level1backgroundmusic.mp3";
+    public static final String LEVEL_TWO_MUSIC = "/music/level2backgroundmusic.mp3";
 
     /**
      * Constructs a BackgroundMusic object with the specified music file path.

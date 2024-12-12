@@ -41,7 +41,7 @@ public class StartScreen {
      */
     private void initializeBackgroundMusic() {
         try {
-            String musicFile = "/music/backgroundmusic.mp3";  // 请确保这个文件存在
+            String musicFile = "/music/menubackgroundmusic.mp3";  // 请确保这个文件存在
             Media sound = new Media(getClass().getResource(musicFile).toExternalForm());
             mediaPlayer = new MediaPlayer(sound);
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // 循环播放
