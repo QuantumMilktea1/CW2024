@@ -97,7 +97,7 @@ public class StartScreen {
         layout.setStyle("-fx-background-color: linear-gradient(to bottom, #1a237e, #000000);");
 
         try {
-            Image backgroundImage = new Image(getClass().getResourceAsStream("/com/example/demo/images/background1.jpg"));
+            Image backgroundImage = new Image(getClass().getResourceAsStream("/com/example/demo/images/StartScreen.jpg"));
             ImageView backgroundView = new ImageView(backgroundImage);
             backgroundView.setFitWidth(stage.getWidth());
             backgroundView.setFitHeight(stage.getHeight());

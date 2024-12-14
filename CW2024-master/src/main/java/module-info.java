@@ -2,6 +2,8 @@ module com.example.demo {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.media;
+    requires org.junit.jupiter.api; // 添加 JUnit 模块
+
 
     opens com.example.demo.controller to javafx.fxml;
     exports com.example.demo.controller;

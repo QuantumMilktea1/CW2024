@@ -3,4 +3,5 @@ module your.module.name {
     
     exports com.example.demo.Actor;
     requires javafx.controls;
+    requires org.mockito;
 } 
