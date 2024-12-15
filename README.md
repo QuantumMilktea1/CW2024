@@ -453,36 +453,42 @@ Use the following Maven commands to build, test, package, and run the project.
         - Elevated the overall game difficulty and player satisfaction.
         - Showcased advanced game design and development capabilities.
 
-3. **Implementation of Sound Settings**
-    - **Description**: Created a comprehensive settings page that allows users to adjust the volume of music and sound effects, providing a personalized audio experience.
+3. ** Implemented Start Menu**
+    - **Description**: CDeveloped a start menu that enables users to begin a new game, load saved progress, and access game settings.
     - **Impact**:
-        - Enhanced user experience through customizable audio options.
-        - Improved accessibility for players with varying audio preferences and requirements.
+        - Provided a clear and intuitive starting point for players to interact with the game.
+        - Streamlined the navigation process, enhancing overall user experience and game flow.
 
-4. **Implementation of Pause Menu**
-    - **Description**: Developed and integrated a pause menu feature that allows players to pause the game, resume gameplay, restart the current level, or exit to the main menu. This feature enhances the user experience by providing flexible control over the game state.
+4. **Shield Display Fix**
+    - **Description**: ixed the issue with the shield display, ensuring it renders correctly during gameplay.
     - **Impact**:
-        - Improved user experience by allowing players to manage game flow effectively.
-        - Enhanced accessibility and control, catering to player needs during gameplay.
+        - Improved visual clarity and accuracy of the shield feature.
+        - Enhanced gameplay by ensuring players can rely on the correct shield representation during critical moments.
 
 ---
 
 ## 6.0 Unexpected Problems
 
-### 1. **Sound Settings Mute Issue**
-- **Issue**: Unable to completely mute the sound using the sound settings sliders because setting the minimum value to `0` in the FXML causes warnings.
-- **Solution**: Adjusted the sliders' minimum values to `0.01`, allowing users to reduce the volume close to mute without triggering warnings.
-
-### 2. **Integration Issues After Refactoring**
-- **Issue**: Refactoring to introduce new manager classes caused unexpected integration bugs between game levels and manager functionalities.
+### 1. **Hitbox Not Functional**
+- **Issue**: Certain characters or objects in the game had non-functional hitboxes, causing collision detection to fail and affecting gameplay.
 - **Solution**:
-    - Conducted incremental refactoring with continuous testing to identify and resolve integration issues promptly.
-    - Utilized unit tests to ensure that each manager class interacted correctly with game levels.
-    - Collaborated with team members to review changes and maintain code consistency.
+-Fixed the issue by ensuring that hitboxes were correctly assigned and updated in each game frame.
+-Added additional unit tests to verify that all hitboxes were functioning as expected across different game states.
+- Investigated the hitbox calculation logic and found errors in how hitboxes were being defined and updated.
+- Conducted manual testing for various game objects to confirm that collisions were detected accurately, improving overall gameplay stability.
 
-### 3. **Performance Degradation Due to Collision Handling Enhancements**
-- **Issue**: Optimizing collision detection mechanisms led to increased computational overhead, causing noticeable lag during intensive gameplay moments.
+### 2. **Integration Issues After Refactoring Game Levels**
+- **Issue**: After refactoring the codebase to introduce new manager classes, issues emerged with the transition between game levels. Players encountered crashes or lag when moving from one level to the next, interrupting the gameplay flow.
+
 - **Solution**:
-    - Optimized collision algorithms to reduce unnecessary calculations.
-    - Implemented spatial partitioning techniques to limit collision checks to nearby entities.
-    - Profiled the game to identify and address specific performance bottlenecks.
+    - Implemented an incremental refactoring approach to ensure that changes were made in manageable portions, allowing for continuous testing.
+    - Focused on testing level transitions specifically, identifying that the new manager classes were not properly handling the state changes between levels.
+    - Adjusted the logic in the level manager to ensure that it properly initialized and cleaned up resources between level transitions.
+    - Worked with the team to review the changes and ensure that the refactor did not introduce unintended side effects. This included reviewing object dependencies and ensuring the state management system was robust across different game levels.
+    - 
+### 3. **Conflict During End Screen Display**
+- **Issue**: When the game reached the end screen, some UI elements conflicted, resulting in abnormal displays or the inability to exit the screen properly. This led to issues where the player was stuck or unable to interact with the UI correctly.
+- **Solution**:
+    - Investigated the UI flow for the end screen and discovered that there was a timing issue in how the end screen UI elements were being initialized and displayed.
+    - Introduced a flag to control the end screen’s visibility, making sure it only displayed once all game processes had completed and resources were cleared.
+    - Resolved the conflict by redesigning the screen transition process, ensuring that elements were loaded and displayed in a synchronized manner.
