@@ -2,6 +2,7 @@ package com.example.demo.Levels;
 
 import com.example.demo.Plane.Boss;
 import com.example.demo.controller.BackgroundMusic;
+import com.example.demo.uiux.ShieldImage;
 
 public class LevelTwo extends LevelParent {
 
@@ -9,16 +10,19 @@ public class LevelTwo extends LevelParent {
 	private static final int PLAYER_INITIAL_HEALTH = 5;
 	private final Boss boss;
 	private LevelViewLevelTwo levelView;
+	private ShieldImage shieldImage;
 
 	public LevelTwo(double screenHeight, double screenWidth) {
 		super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH);
 		boss = new Boss();
+		shieldImage = boss.getShieldImage();
 		initializeMusic(BackgroundMusic.LEVEL_TWO_MUSIC);
 	}
 
 	@Override
 	protected void initializeFriendlyUnits() {
 		getRoot().getChildren().add(getUser());
+		getRoot().getChildren().add(shieldImage);
 	}
 
 	@Override
