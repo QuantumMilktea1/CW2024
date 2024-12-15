@@ -14,19 +14,34 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 /**
- * The StartScreen class is responsible for displaying the initial screen of the application,
- * including the title and buttons to start the game or exit the application.
+ * The {@code StartScreen} class is responsible for displaying the initial screen of the application.
+ * <p>
+ * This class includes functionality to show the title, start game and exit buttons, and play
+ * background music. It sets up the UI elements and handles button actions to transition to
+ * the game or close the application.
+ * </p>
  */
 public class StartScreen {
 
+    /**
+     * The primary stage for displaying the start screen.
+     */
     private final Stage stage;
+
+    /**
+     * The controller that manages the game logic and transitions.
+     */
     private final Controller controller;
+
+    /**
+     * MediaPlayer instance for playing background music.
+     */
     private MediaPlayer mediaPlayer;
 
     /**
-     * Constructs a StartScreen with the specified stage and controller.
+     * Constructs a {@code StartScreen} with the specified stage and controller.
      *
-     * @param stage     the primary stage for this application
+     * @param stage      the primary stage for this application
      * @param controller the controller that manages game logic
      */
     public StartScreen(Stage stage, Controller controller) {
@@ -36,16 +51,19 @@ public class StartScreen {
     }
 
     /**
-     * Initializes the background music for the application.
-     * The music will loop indefinitely at 50% volume.
+     * Initializes and plays the background music for the start screen.
+     * <p>
+     * The music will loop indefinitely at 50% volume. If the audio file cannot be loaded,
+     * an error message will be printed to the console.
+     * </p>
      */
     private void initializeBackgroundMusic() {
         try {
-            String musicFile = "/music/menubackgroundmusic.mp3";  // 请确保这个文件存在
+            String musicFile = "/music/menubackgroundmusic.mp3"; // Ensure this file exists in the resources
             Media sound = new Media(getClass().getResource(musicFile).toExternalForm());
             mediaPlayer = new MediaPlayer(sound);
-            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // 循环播放
-            mediaPlayer.setVolume(0.5); // 设置音量为50%
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop the music
+            mediaPlayer.setVolume(0.5); // Set volume to 50%
             mediaPlayer.play();
         } catch (Exception e) {
             System.out.println("Background music could not be loaded");
@@ -53,7 +71,11 @@ public class StartScreen {
     }
 
     /**
-     * Displays the start screen with a title and buttons to start the game or exit.
+     * Displays the start screen with a title, "Start Game" button, and "Exit" button.
+     * <p>
+     * The start screen includes a title label styled for prominence, buttons styled for
+     * interactivity, and a background image or default gradient if the image fails to load.
+     * </p>
      */
     public void show() {
         // Create a label for the title
@@ -73,7 +95,7 @@ public class StartScreen {
         startButton.setOnAction(e -> {
             try {
                 stopBackgroundMusic();
-                controller.launchGame();
+                controller.launchGame(); // Transition to game logic
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
